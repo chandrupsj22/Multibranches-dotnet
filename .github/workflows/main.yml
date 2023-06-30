@@ -43,7 +43,10 @@ jobs:
            ls ./publish
            echo "inside wwwroot"
            echo "<html><body><h1>ASP.NET GitHub Pages Example</h1></body></html>" > ./publish/branch2/index.html
-
+      - name: Configure Git
+        run: |
+          git config --global user.name "chandrupsj22"
+          git config --global user.email "133023965+chandru-kloudping@users.noreply.github.com"
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
