@@ -15,7 +15,18 @@ jobs:
         with:
           ref: main
 
-      
+      - name: Checkout branch1
+        uses: actions/checkout@v2
+        with:
+          ref: branch1
+
+      - name: NuGet Restore for branch1
+        run: nuget restore
+
+      - name: Build and Publish branch1
+        run: |
+          dotnet build --configuration Release
+          dotnet publish --configuration Release --output ./publish/branch1
       
       - name: Checkout branch2
         uses: actions/checkout@v2
