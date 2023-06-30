@@ -41,6 +41,7 @@ jobs:
         run: |
            dotnet publish FirstWebApp.sln --configuration Release --output ./publish
            ls ./publish
+           echo "inside wwwroot"
            ls ./publish/wwwroot
 
       - name: Deploy to GitHub Pages
