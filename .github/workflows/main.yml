@@ -43,10 +43,10 @@ jobs:
            ls ./publish
            echo "inside wwwroot"
            ls ./publish/wwwroot
-           echo "<html><body><h1>ASP.NET GitHub Pages Example</h1></body></html>" > ./publish/index.html
+           echo "<html><body><h1>ASP.NET GitHub Pages Example</h1></body></html>" > /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./publish/web.config
+          publish_dir: /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch1/web.config
