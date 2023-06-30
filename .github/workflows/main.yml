@@ -45,21 +45,8 @@ jobs:
            ls ./publish/wwwroot
            echo "<html><body><h1>ASP.NET GitHub Pages Example</h1></body></html>" > ./publish/index.html
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "chandrupsj22"
-          git config --global user.email "133023965+chandru-kloudping@users.noreply.github.com"
-      - name: Checkout branch2
-        uses: actions/checkout@v2
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          ref: gh-pages
-          
-      - name: Commit and push to gh-pages branch
-        run: |
-          
-          git --work-tree=./publish add --all
-          git --work-tree=./publish commit -m "Publish to GitHub Pages"
-          git push origin HEAD:gh-pages --force
-
-      - name: Switch back to main branch
-        run: git checkout main
+          github_token: ${{ secrets.TOKEN }}
+          publish_dir: ./publish/web.config
