@@ -34,19 +34,24 @@ jobs:
         with:
           ref: branch2
 
-      - name: Restore NuGet packages
-        run: dotnet restore
-
-      - name: Build and Publish
+      - name: Publish to GitHub Pages
         run: |
-           dotnet publish FirstWebApp.sln --configuration Release --output ./publish
-           ls ./publish
-           echo "inside wwwroot"
-           ls ./publish/wwwroot
-           echo "<html><body><h1>ASP.NET GitHub Pages Example</h1></body></html>" > ./publish/index.html
+          dotnet publish --no-restore --no-build --configuration Release -o ./publish
+          echo "<html><body><h1>ASP.NET GitHub Pages Example</h1></body></html>" > ./publish/index.html
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./publish/web.conf
+      - name: Configure Git
+        run: |
+          git config --global user.name "chandrupsj22"
+          git config --global user.email "133023965+chandru-kloudping@users.noreply.github.com"
+
+      - name: Commit and push to gh-pages branch
+        run: |
+          git checkout --orphan gh-pages
+          git --work-tree=./publish add --all
+          git --work-tree=./publish commit -m "Publish to GitHub Pages"
+          git push origin HEAD:gh-pages --force
+
+      - name: Switch back to main branch
+        run: git checkout main
