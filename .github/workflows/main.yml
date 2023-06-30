@@ -27,7 +27,7 @@ jobs:
         run: |
           dotnet build --configuration Release
           dotnet publish --configuration Release --output ./publish/branch1
-          ls /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2/wwwroot/
+          ls /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2
       
       - name: Checkout branch2
         uses: actions/checkout@v2
@@ -41,4 +41,4 @@ jobs:
         run: |
           dotnet build --configuration Release
           dotnet publish --configuration Release --output ./publish/branch2
-          ls /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2/wwwroot/
+          ls /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2
