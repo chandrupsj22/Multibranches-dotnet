@@ -26,7 +26,7 @@ jobs:
       - name: Build and Publish branch1
         run: |
           dotnet build --configuration Release
-          dotnet publish --configuration Release --output ./publish/branch1
+          dotnet publish --configuration Release --output /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch1
           ls /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch1
       
       - name: Checkout branch2
@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and Publish
         run: |
-           dotnet publish FirstWebApp.sln --configuration Release --output ./publish/branch2
+           dotnet publish FirstWebApp.sln --configuration Release --output /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2
            ls ./publish
            echo "inside wwwroot"
            echo "<html><body><h1>ASP.NET GitHub Pages Example</h1></body></html>" > /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2/index.html
@@ -48,4 +48,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
-          publish_dir: /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch1/web.config
+          publish_dir: /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2/web.config
