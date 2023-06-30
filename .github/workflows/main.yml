@@ -22,3 +22,10 @@ jobs:
       - name: NuGet Restore for branch1
         run: nuget restore
       
+      - name: Checkout branch2
+        uses: actions/checkout@v2
+        with:
+          ref: branch2
+
+      - name: NuGet Restore for branch2
+        run: nuget restore
