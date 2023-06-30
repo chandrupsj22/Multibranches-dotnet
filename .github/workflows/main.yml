@@ -15,9 +15,6 @@ jobs:
         with:
           ref: main
 
-      - name: NuGet Restore for main branch
-        run: nuget restore
-
       - name: Checkout branch1
         uses: actions/checkout@v2
         with:
