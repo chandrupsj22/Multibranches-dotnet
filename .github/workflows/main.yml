@@ -1,0 +1,35 @@
+name: Checkout and NuGet Restore
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  checkout-branches:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: NuGet Restore for main branch
+        run: nuget restore
+
+      - name: Checkout branch1
+        uses: actions/checkout@v2
+        with:
+          ref: branch1
+
+      - name: NuGet Restore for branch1
+        run: nuget restore
+
+      - name: Checkout branch2
+        uses: actions/checkout@v2
+        with:
+          ref: branch2
+
+      - name: NuGet Restore for branch2
+        run: nuget restore
