@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and Publish
         run: |
-           dotnet publish FirstWebApp.sln --configuration Release --output ./publish
+           dotnet publish FirstWebApp.sln --configuration Release --output ./publish/branch2
            ls ./publish
            echo "inside wwwroot"
            ls ./publish/wwwroot
