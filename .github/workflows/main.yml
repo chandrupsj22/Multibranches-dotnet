@@ -24,3 +24,8 @@ jobs:
 
       - name: NuGet Restore for branch2
         run: nuget restore
+      
+      - name: Build and Publish branch2
+        run: |
+          dotnet build --configuration Release
+          dotnet publish --configuration Release --output ./publish/branch2
