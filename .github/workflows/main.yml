@@ -34,11 +34,15 @@ jobs:
         with:
           ref: branch2
 
-      - name: NuGet Restore for branch2
-        run: nuget restore
-      
-      - name: Build and Publish branch2
+      - name: Publish to GitHub Pages
         run: |
-          dotnet build --configuration Release
-          dotnet publish --configuration Release --output ./publish/branch2
-          ls /home/runner/work/Multibranches-dotnet/Multibranches-dotnet/publish/branch2
+          dotnet publish --no-restore --no-build --configuration Release -o ./publish
+          echo "<html><body><h1>ASP.NET GitHub Pages Example</h1></body></html>" > ./publish/index.html
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+           github_token: ${{ secrets.TOKEN }}
+           publish_dir: ./publish
