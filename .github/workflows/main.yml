@@ -14,14 +14,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main
-      - name: Install .NET Framework Developer Pack
-        shell: pwsh
+      - name: Download .NET Framework Developer Pack
         run: |
-          # Download the .NET Framework Developer Pack installer
-          Invoke-WebRequest -Uri 'https://example.com/ndp-devpack.exe' -OutFile 'ndp-devpack.exe'
+          $url = 'https://download.microsoft.com/download/6/E/3/6E3A4E89-5F2D-4A4A-9A3A-BB5652E92C2E/NDP461-DevPack-KB3105179-ENU.exe'
+          $path = "$env:TEMP\NDP461-DevPack-KB3105179-ENU.exe"
+          Invoke-WebRequest -Uri $url -OutFile $path
 
-          # Install the .NET Framework Developer Pack
-          Start-Process -FilePath 'ndp-devpack.exe' -ArgumentList '/q' -Wait
+      - name: Install .NET Framework Developer Pack
+        run: |
+          $path = "$env:TEMP\NDP461-DevPack-KB3105179-ENU.exe"
+          Start-Process -FilePath $path -ArgumentList '/q' -Wait
       - name: Checkout branch1
         uses: actions/checkout@v2
         with:
