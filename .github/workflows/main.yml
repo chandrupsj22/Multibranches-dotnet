@@ -14,7 +14,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main
-      
+      - name: Configure Git
+        run: |
+          git config --global user.name "chandrupsj22"
+          git config --global user.email "133023965+chandru-kloudping@users.noreply.github.com"
       - name: Git Tags
         env:
           GIT_TOKEN: ${{ secrets.TOKEN }}
