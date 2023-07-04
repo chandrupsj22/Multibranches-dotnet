@@ -20,7 +20,7 @@ jobs:
           git config --global user.email "133023965+chandru-kloudping@users.noreply.github.com"
       - name: Git Tags
         run: |
-           repo_name=$(basename "${{ github.repository }}")
+           $repo_name=$(basename "${{ github.repository }}")
            $tag_name= "${{github.sha}}${{github.run_number}}${repo_name}"
            git tag -a -m "tag" "${tag_name}"
            git push origin "$tag_name"
