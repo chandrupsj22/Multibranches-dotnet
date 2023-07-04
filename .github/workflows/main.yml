@@ -22,7 +22,10 @@ jobs:
       - name: Install .NET Framework Developer Pack
         run: |
           # Download the .NET Framework Developer Pack installer
-          Invoke-WebRequest -Uri 'https://download.microsoft.com/download/XXXXX/XXXXX/XXXXX/XXXXX/ndp-devpack-XXXXX.exe' -OutFile 'ndp-devpack.exe'
+          Invoke-WebRequest -Uri 'https://example.com/ndp-devpack.exe' -OutFile 'ndp-devpack.exe'
+
+          # Install the .NET Framework Developer Pack
+          Start-Process -FilePath 'ndp-devpack.exe' -ArgumentList '/q' -Wait
 
           # Install the .NET Framework Developer Pack
           Start-Process -FilePath 'ndp-devpack.exe' -ArgumentList '/q' -Wait
