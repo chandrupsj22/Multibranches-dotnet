@@ -20,12 +20,10 @@ jobs:
         with:
           ref: branch1
       - name: Install .NET Framework Developer Pack
+        shell: pwsh
         run: |
           # Download the .NET Framework Developer Pack installer
           Invoke-WebRequest -Uri 'https://example.com/ndp-devpack.exe' -OutFile 'ndp-devpack.exe'
-
-          # Install the .NET Framework Developer Pack
-          Start-Process -FilePath 'ndp-devpack.exe' -ArgumentList '/q' -Wait
 
           # Install the .NET Framework Developer Pack
           Start-Process -FilePath 'ndp-devpack.exe' -ArgumentList '/q' -Wait
