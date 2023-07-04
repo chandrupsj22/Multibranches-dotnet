@@ -7,19 +7,19 @@ on:
     
 jobs:
   checkout-branches:
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
     
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v2
         with:
           ref: main
-      - name: Install .NET Framework Developer Pack
+      - name: Download MSBuild
         run: |
-          
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https
-          sudo apt-get install -y dotnet-sdk
+          # Define the download URL based on the desired version
+          $msbuildUrl = 'https://download.microsoft.com/download/...'
+          # Download MSBuild installer
+          Invoke-WebRequest -Uri $msbuildUrl -OutFile msbuild_installer.msi
       - name: Checkout branch1
         uses: actions/checkout@v2
         with:
