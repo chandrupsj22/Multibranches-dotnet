@@ -23,7 +23,7 @@ jobs:
           GIT_TOKEN: ${{ secrets.TOKEN }}
         run: |
            repo_name=$(basename "${{ github.repository }}")
-           tag_name=${{github.sha}}${{github.run_number}}.${repo_name}
+           tag_name=${{github.sha}}.${{github.run_number}}.${repo_name}
            git tag -a -m "tag" "${tag_name}"
            git push origin "$tag_name"
        
