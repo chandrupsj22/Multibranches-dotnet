@@ -7,7 +7,7 @@ on:
     
 jobs:
   checkout-branches:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
       - name: Checkout main branch
@@ -21,9 +21,11 @@ jobs:
           ref: branch1
       - name: Install .NET Framework Developer Pack
         run: |
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https
-          sudo apt-get install -y dotnet-sdk-4.6.1 
+          # Download the .NET Framework Developer Pack installer
+          Invoke-WebRequest -Uri 'https://download.microsoft.com/download/XXXXX/XXXXX/XXXXX/XXXXX/ndp-devpack-XXXXX.exe' -OutFile 'ndp-devpack.exe'
+
+          # Install the .NET Framework Developer Pack
+          Start-Process -FilePath 'ndp-devpack.exe' -ArgumentList '/q' -Wait
 
       - name: NuGet Restore for branch1
         run: nuget restore
