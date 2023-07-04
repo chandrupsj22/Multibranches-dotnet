@@ -24,6 +24,8 @@ jobs:
            $tag_name= "${{github.sha}}${{github.run_number}}${repo_name}"
            git tag -a -m "tag" "${tag_name}"
            git push origin "$tag_name"
+        env:
+          GIT_TOKEN: ${{ secrets.TOKEN }}
       - name: Checkout branch1
         uses: actions/checkout@v2
         with:
