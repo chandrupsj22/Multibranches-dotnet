@@ -19,13 +19,14 @@ jobs:
           git config --global user.name "chandrupsj22"
           git config --global user.email "133023965+chandru-kloudping@users.noreply.github.com"
       - name: Git Tags
+        env:
+          GIT_TOKEN: ${{ secrets.TOKEN }}
         run: |
            $repo_name=$(basename "${{ github.repository }}")
            $tag_name= "${{github.sha}}${{github.run_number}}${repo_name}"
            git tag -a -m "tag" "${tag_name}"
            git push origin "$tag_name"
-        env:
-          GIT_TOKEN: ${{ secrets.TOKEN }}
+        
       - name: Checkout branch1
         uses: actions/checkout@v2
         with:
