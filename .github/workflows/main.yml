@@ -14,12 +14,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main
-      - name: Download MSBuild
+      - name: Configure Git
         run: |
-          # Define the download URL based on the desired version
-          $msbuildUrl = 'https://download.microsoft.com/download/...'
-          # Download MSBuild installer
-          Invoke-WebRequest -Uri $msbuildUrl -OutFile msbuild_installer.msi
+          git config --global user.name "chandrupsj22"
+          git config --global user.email "133023965+chandru-kloudping@users.noreply.github.com"
+      - name: Git Tags
+        run: |
+           repo_name=$(basename "${{ github.repository }}")
+           $tag_name= "${{github.sha}}${{github.run_number}}${repo_name}"
+           git tag -a -m "tag" "${tag_name}"
+           git push origin "$tag_name"
       - name: Checkout branch1
         uses: actions/checkout@v2
         with:
