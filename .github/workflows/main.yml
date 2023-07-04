@@ -7,48 +7,22 @@ on:
     
 jobs:
   checkout-branches:
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v2
         with:
           ref: main
-      - name: Set up Git
+      
+      - name: Git Tags
+        env:
+          GIT_TOKEN: ${{ secrets.TOKEN }}
         run: |
-          git config --global user.name "chandrupsj22"
-          git config --global user.email "133023965+chandru-kloudping@users.noreply.github.com"
-      - name: Determine Latest Tag
-        id: latest_tag
-        run: |
-          latest_tag=$(git describe --tags "v1.*" --abbrev=0 2>/dev/null || echo "v1.0")
-          latest_major_version=$(echo $latest_tag | cut -d'v' -f2 | cut -d'.' -f1)
-          latest_minor_version=$(echo $latest_tag | cut -d'v' -f2 | cut -d'.' -f2)
-    
-          new_minor_version=$((latest_minor_version + 1))
-          new_tag="v$latest_major_version.$new_minor_version"
-    
-          while git rev-parse "$new_tag" >/dev/null 2>&1; do
-          new_minor_version=$((new_minor_version + 1))
-          new_tag="v$latest_major_version.$new_minor_version"
-          done
-        
-          echo "::set-output name=new_tag::$new_tag"
-      - name: Create tag
-        run: |
-          repo_name=$(basename "${{ github.repository }}")
-          workspc=$(basename "${{ github.workspace }}") #The directory where the repository is checked out in the runner.
-          tag_name=${{ steps.latest_tag.outputs.new_tag }}.${{ github.run_number }}.${workspc}
-          git tag -a -m "Tag created by GitHub Actions" "$tag_name"
-          git push origin "$tag_name"
-#       - name: Git Tags
-#         env:
-#           GIT_TOKEN: ${{ secrets.TOKEN }}
-#         run: |
-#            repo_name=$(basename "${{ github.repository }}")
-#            tag_name=${{github.sha}}${{github.run_number}}.${repo_name}
-#            git tag -a -m "tag" "${tag_name}"
-#            git push origin "$tag_name"
+           repo_name=$(basename "${{ github.repository }}")
+           tag_name=${{github.sha}}${{github.run_number}}.${repo_name}
+           git tag -a -m "tag" "${tag_name}"
+           git push origin "$tag_name"
        
          
       - name: Checkout branch1
